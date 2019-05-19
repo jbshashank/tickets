@@ -12,6 +12,13 @@ public class GlobalConstants
 
 	public static final String IMAGE_UPLOAD_FOLDER = "images";
 	public static final String DIR_PATH_SEPERATOR = "/";
+	
+	//TWILIO details
+	public static final String ACCOUNT_SID = "QUM2NDdhNzU2MDYzYTdkNWE5NTM4NzU3YjIzNDkyZGJjYg==";
+	public static final String AUTH_TOKEN = "ZDI1NDY5ZmU2ZWMwMGQxMzcxNTU4ZWYyOGI3NTBmMGI=";
+	
+	//SENDGRID details
+	public static final String SENDGRID_TOKEN = "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";
 	/* TODO:
 	 	1. Change you server folder path where image will be uploaded
 	 */
