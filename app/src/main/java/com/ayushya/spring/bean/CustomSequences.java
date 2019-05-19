@@ -9,6 +9,7 @@ public class CustomSequences {
     private String id;
     private int seq;
     private String date;
+    
 	public String getDate() {
 		return date;
 	}

@@ -4,11 +4,6 @@ import static org.springframework.data.mongodb.core.FindAndModifyOptions.options
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.bson.BsonDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
@@ -22,8 +17,7 @@ import com.ayushya.spring.bean.*;
 public class NextSequenceService {
     @Autowired private MongoOperations mongo;
 
-    public String getNextSequence(String seqName,String date)
-    {
+    public String getNextSequence(String seqName,String date){
     	String updateDate = date;
     	int sequence=1;   	
     	CustomSequences counter = mongo.findOne(query(where("_id").is(seqName)), CustomSequences.class);
@@ -38,5 +32,5 @@ public class NextSequenceService {
 		String ticketNumber = "ATAS"+ updateDate + numberAsString;
 		
         return ticketNumber;
-}
+    }
 }
