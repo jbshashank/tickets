@@ -1,10 +1,9 @@
 Manifest-Version: 1.0
+Built-By: doroot
+Build-Jdk: 1.8.0_211
 Implementation-Title: Spring-Boot-Mongo Maven Webapp
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: doroot
-Implementation-Vendor-Id: com.spring-boot-mongodb
-Build-Jdk: 1.8.0_211
-Implementation-URL: http://maven.apache.org
-Created-By: Maven Integration for Eclipse
+Implementation-Vendor-Id: com.ayushya
 Implementation-Vendor: Pivotal Software, Inc.
+Created-By: Maven Integration for Eclipse
 
