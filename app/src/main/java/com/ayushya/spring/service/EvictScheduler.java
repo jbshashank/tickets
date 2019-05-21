@@ -13,7 +13,7 @@ public class EvictScheduler {
     private LocalCacheEvict localCacheEvict;
     private static final Logger LOGGER = LoggerFactory.getLogger(EvictScheduler.class);
     
-    @Scheduled(fixedDelay=1000*60*60)
+    @Scheduled(fixedDelay=100000)
     public void clearCaches() {
         System.out.println("Invalidating caches");
         localCacheEvict.evictAllUsersCache();

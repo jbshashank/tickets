@@ -2,10 +2,15 @@ package com.ayushya.spring.service;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import com.ayushya.spring.bean.technician;
 import com.ayushya.spring.bean.tickets;
@@ -22,6 +27,24 @@ public class TicketServiceImp implements TicketService {
 	public void createTicket(List<tickets> ticket) {
 		// TODO Auto-generated method stub
 		ticketRepository.save(ticket);
+	}
+
+	@Cacheable("technicians")
+	public void getEmployeeData(List<technician> sE) {
+		JSONArray jsonarray = new JSONArray(new RestTemplate().getForObject("http://services-1.finchtech.in/Employee/user/get", String.class));
+		for(int i=0; i<jsonarray.length(); i++){
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        org.json.JSONObject obj = jsonarray.getJSONObject(i).getJSONObject("employeePersonalDetails");
+	        technician Se = new technician();
+	        Se.setCity(obj.getString("city"));
+	        sE.add(Se);
+
+	    }   
 	}
 
 

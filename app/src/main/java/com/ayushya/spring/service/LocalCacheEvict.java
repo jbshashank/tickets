@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LocalCacheEvict {
-    @CacheEvict(cacheNames = "student",allEntries = true)
+    @CacheEvict(cacheNames = "technicians",allEntries = true)
     public void evictAllUsersCache() {
     	System.out.println("evicting cache");
     }
