@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.ayushya.spring.bean.technician;
 import com.ayushya.spring.bean.tickets;
@@ -34,9 +36,6 @@ public class ticketsController {
 	@Autowired
 	private NextSequenceService nextSequenceService;
 
-	@Autowired
-	private technicianRepository techRepo;
-	
 	@Autowired
 	private TicketService ticketService;
 
@@ -58,6 +57,12 @@ public class ticketsController {
 		ticketService.getEmployeeData(SE);
 		repository.save(tick);
 		return tick;
+	}
+	
+	@RequestMapping(value = "/{_id}", method = RequestMethod.PUT)
+	public tickets updateTicket(@PathVariable String _id, @Valid @RequestBody tickets ticket) {
+		ticket.set_id(_id);
+		return repository.save(ticket);
 	}
 
 

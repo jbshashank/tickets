@@ -1,5 +1,6 @@
 package com.ayushya.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -23,6 +24,8 @@ public class TicketServiceImp implements TicketService {
 	@Autowired
 	ticketsRepository ticketRepository;
 
+	List<technician> tech = new ArrayList<technician>();
+	
 	@Override
 	public void createTicket(List<tickets> ticket) {
 		// TODO Auto-generated method stub
@@ -43,9 +46,9 @@ public class TicketServiceImp implements TicketService {
 	        technician Se = new technician();
 	        Se.setCity(obj.getString("city"));
 	        sE.add(Se);
-
+	        
 	    }   
 	}
-
-
+	
+	
 }
