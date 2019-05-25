@@ -7,23 +7,22 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.ayushya.spring.bean.technician;
 import com.ayushya.spring.bean.tickets;
 import com.ayushya.spring.repository.technicianRepository;
 import com.ayushya.spring.repository.ticketsRepository;
+import com.ayushya.spring.service.AssignService;
 import com.ayushya.spring.service.NextSequenceService;
 import com.ayushya.spring.service.TicketService;
+import com.ayushya.spring.service.closedTicketService;
 
 @RestController
 @RequestMapping("/tickets")
@@ -34,10 +33,14 @@ public class ticketsController {
 	private ticketsRepository repository;
 
 	@Autowired
+	private technicianRepository technicianRepository;
+	
+	@Autowired
 	private NextSequenceService nextSequenceService;
 
 	@Autowired
 	private TicketService ticketService;
+	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public Iterable<tickets> getAllTickets(Pageable pageable){
@@ -48,13 +51,23 @@ public class ticketsController {
 	public tickets getOneTicket(@PathVariable String _id) {
 		return repository.findOne(_id);
 	}
+	
+	@RequestMapping(value = "/closed", method = RequestMethod.GET)
+	public List<tickets> getClosedTickets(){
+		return new closedTicketService().getClosedTickets(repository.findAll());
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public tickets createTicket(@Valid @RequestBody tickets tick) {
 		tick.set_id(nextSequenceService.getNextSequence("customSequences",new SimpleDateFormat("ddMMyy").format(new Date())));
 		tick.setDate_of_post(new SimpleDateFormat("ddMMyyhhmmss").format(new Date()));
-		tick.setTech_name(null);
-		ticketService.getEmployeeData(SE);
+		List<technician> data = ticketService.getEmployeeData(SE);
+		String id = new AssignService().assignTicket(data, tick.getCity());
+		tick.setTech_name(id);
+		technician tech = new technician();
+		tech = technicianRepository.findOne(id);
+		tech.setNo_assigned(technicianRepository.findOne(id).getNo_assigned() + 1);
+		technicianRepository.save(tech);
 		repository.save(tick);
 		return tick;
 	}

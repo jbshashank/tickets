@@ -1,12 +1,8 @@
 package com.ayushya.spring.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -24,7 +20,8 @@ public class TicketServiceImp implements TicketService {
 	@Autowired
 	ticketsRepository ticketRepository;
 
-	List<technician> tech = new ArrayList<technician>();
+	@Autowired
+	technicianRepository technicianRepository;
 	
 	@Override
 	public void createTicket(List<tickets> ticket) {
@@ -33,7 +30,7 @@ public class TicketServiceImp implements TicketService {
 	}
 
 	@Cacheable("technicians")
-	public void getEmployeeData(List<technician> sE) {
+	public List<technician> getEmployeeData(List<technician> sE) {
 		JSONArray jsonarray = new JSONArray(new RestTemplate().getForObject("http://services-1.finchtech.in/Employee/user/get", String.class));
 		for(int i=0; i<jsonarray.length(); i++){
 			try {
@@ -44,10 +41,15 @@ public class TicketServiceImp implements TicketService {
 			}
 	        org.json.JSONObject obj = jsonarray.getJSONObject(i).getJSONObject("employeePersonalDetails");
 	        technician Se = new technician();
+	        Se.set_id(jsonarray.getJSONObject(i).getString("id"));
 	        Se.setCity(obj.getString("city"));
-	        sE.add(Se);
-	        
-	    }   
+	        Se.setPin_code(obj.getString("pincode"));
+	        Se.setLevel_of_expertise(obj.getString("expertiesLevel"));
+	        Se.setAddress(obj.getString("address"));
+	        sE.add(Se); 
+	        technicianRepository.save(Se);
+	    }
+		return technicianRepository.findAll(); 
 	}
 	
 	

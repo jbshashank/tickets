@@ -12,13 +12,14 @@ public class technician {
 	public String pin_code;
 	public String expert_in;
 	public String level_of_expertise;
+	public int no_assigned;
 	
 	public technician() {
 		
 	}
 
-	public technician(String _id, String mobile_number, String address, String city, String pin_code,
-			String expert_in, String level_of_expertise) {
+	public technician(String _id, String mobile_number, String address, String city, String pin_code, String expert_in,
+			String level_of_expertise, int no_assigned) {
 		super();
 		this._id = _id;
 		this.mobile_number = mobile_number;
@@ -27,6 +28,7 @@ public class technician {
 		this.pin_code = pin_code;
 		this.expert_in = expert_in;
 		this.level_of_expertise = level_of_expertise;
+		this.no_assigned = no_assigned;
 	}
 
 	public String get_id() {
@@ -84,5 +86,13 @@ public class technician {
 	public void setLevel_of_expertise(String level_of_expertise) {
 		this.level_of_expertise = level_of_expertise;
 	}
-	
+
+	public int getNo_assigned() {
+		return no_assigned;
+	}
+
+	public void setNo_assigned(int no_assigned) {
+		this.no_assigned = no_assigned;
+	}
+
 }
