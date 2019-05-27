@@ -74,11 +74,13 @@ public class ticketsController {
 		tick.setDate_of_post(new SimpleDateFormat("ddMMyyhhmmss").format(new Date()));
 		List<technician> data = ticketService.getEmployeeData(SE);
 		String id = new AssignService().assignTicket(data, tick.getCity());
+		if(id!=null) {
 		tick.setTech_name(id);
 		technician tech = new technician();
 		tech = technicianRepository.findOne(id);
 		tech.setNo_assigned(technicianRepository.findOne(id).getNo_assigned() + 1);
 		technicianRepository.save(tech);
+		}
 		repository.save(tick);
 		return tick;
 	}
