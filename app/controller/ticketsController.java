@@ -74,8 +74,13 @@ public class ticketsController {
 	}
 	
 	@RequestMapping(value = "/city/{city_filter}", method = RequestMethod.GET)
-	public tickets updateTicket(@PathVariable String city_filter, @Valid @RequestBody tickets ticket) {
-		return repository.findOne(city_filter);
+	public Iterable<tickets> cityFilter(@PathVariable String city_filter, Pageable pageable) {
+		return repository.findAll(pageable);
+	}
+	
+	@RequestMapping(value = "/visit_date/{visit_date}", method = RequestMethod.GET)
+	public Iterable<tickets> visitFilter(@PathVariable String visit_date, Pageable pageable) {
+		return repository.findAll(pageable);
 	}
 
 
