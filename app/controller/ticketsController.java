@@ -67,12 +67,6 @@ public class ticketsController {
 		return repository.save(ticket);
 	}
 	
-	@RequestMapping(value = "/{_id}", method = RequestMethod.PUT)
-	public tickets updateTicket(@PathVariable String _id, @Valid @RequestBody tickets ticket) {
-		ticket.set_id(_id);
-		return repository.save(ticket);
-	}
-	
 	@RequestMapping(value = "/city/{city_filter}", method = RequestMethod.GET)
 	public Iterable<tickets> cityFilter(@PathVariable String city_filter, Pageable pageable) {
 		return repository.findAll(pageable);
