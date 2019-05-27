@@ -66,6 +66,17 @@ public class ticketsController {
 		ticket.set_id(_id);
 		return repository.save(ticket);
 	}
+	
+	@RequestMapping(value = "/{_id}", method = RequestMethod.PUT)
+	public tickets updateTicket(@PathVariable String _id, @Valid @RequestBody tickets ticket) {
+		ticket.set_id(_id);
+		return repository.save(ticket);
+	}
+	
+	@RequestMapping(value = "/city/{city_filter}", method = RequestMethod.GET)
+	public tickets updateTicket(@PathVariable String city_filter, @Valid @RequestBody tickets ticket) {
+		return repository.findOne(city_filter);
+	}
 
 
 

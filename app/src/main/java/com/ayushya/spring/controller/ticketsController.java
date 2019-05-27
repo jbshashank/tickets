@@ -56,6 +56,17 @@ public class ticketsController {
 	public List<tickets> getClosedTickets(){
 		return new closedTicketService().getClosedTickets(repository.findAll());
 	}
+	
+	@RequestMapping(value = "/city/{city_filter}", method = RequestMethod.GET)
+	public Iterable<tickets> getTicketsInCity(@PathVariable String city_filter,Pageable pageable){
+		return repository.findAll(pageable);
+	}
+	@RequestMapping(value = "/visit_date/{visit_date}", method = RequestMethod.GET)
+	public Iterable<tickets> getTicketsBasedOnVisitDate(@PathVariable String visit_date,Pageable pageable){
+		return repository.findAll(pageable);
+	}
+	
+
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public tickets createTicket(@Valid @RequestBody tickets tick) {
@@ -77,6 +88,7 @@ public class ticketsController {
 		ticket.set_id(_id);
 		return repository.save(ticket);
 	}
+
 
 
 

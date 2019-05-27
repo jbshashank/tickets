@@ -8,5 +8,8 @@ import org.bson.types.ObjectId;
 
 public interface ticketsRepository extends MongoRepository<tickets, String>{
 	tickets findBy_id(ObjectId _id);
+	tickets findBy_city(String city);
 }
+
+
 
