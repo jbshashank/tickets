@@ -59,11 +59,13 @@ public class ticketsController {
 	
 	@RequestMapping(value = "/city/{city_filter}", method = RequestMethod.GET)
 	public Iterable<tickets> getTicketsInCity(@PathVariable String city_filter,Pageable pageable){
-		return repository.findAll(pageable);
+		return (Iterable<tickets>) repository.findByCity(city_filter,pageable);
+		//return repository.findAll(pageable);
 	}
 	@RequestMapping(value = "/visit_date/{visit_date}", method = RequestMethod.GET)
 	public Iterable<tickets> getTicketsBasedOnVisitDate(@PathVariable String visit_date,Pageable pageable){
-		return repository.findAll(pageable);
+		return (Iterable<tickets>) repository.findByVisit_date(visit_date,pageable);
+		//return repository.findAll(pageable);
 	}
 	
 
@@ -81,6 +83,7 @@ public class ticketsController {
 		tech.setNo_assigned(technicianRepository.findOne(id).getNo_assigned() + 1);
 		technicianRepository.save(tech);
 		}
+		tick.setTicket_status("OPEN");
 		repository.save(tick);
 		return tick;
 	}

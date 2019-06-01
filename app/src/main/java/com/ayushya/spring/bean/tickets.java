@@ -1,12 +1,15 @@
 package com.ayushya.spring.bean;
 
 import org.springframework.data.annotation.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class tickets {
 	
 	@Id
 	public String _id;
 	public String call_type;
+    @Size(min=4, message="First name must not be less than 2 characters")
 	public String name;
 	public String address_1;
 	public String address_2;
