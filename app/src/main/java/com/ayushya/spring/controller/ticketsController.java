@@ -88,10 +88,33 @@ public class ticketsController {
 	@RequestMapping(value = "/{_id}", method = RequestMethod.PUT)
 	public tickets updateTicket(@PathVariable String _id, @Valid @RequestBody tickets ticket) {
 		ticket.set_id(_id);
+		tickets t = repository.findOne(_id);
+		ticket.setAddress_1(t.getAddress_1());
+		ticket.setAddress_2(t.getAddress_2());
+		ticket.setBrand(t.getBrand());
+		ticket.setCall_type(t.getCall_type());
+		ticket.setCity(t.getCity());
+		ticket.setDate_of_post(t.getDate_of_post());
+		ticket.setDealer_name(t.getDealer_name());
+		ticket.setEmail_id(t.getEmail_id());
+		ticket.setInvoice_number(t.getInvoice_number());
+		ticket.setIw(t.getIw());
+		ticket.setMobile_number_1(t.getMobile_number_1());
+		ticket.setMobile_number_2(t.getMobile_number_2());
+		ticket.setModel_name(t.getModel_name());
+		ticket.setName(t.getName());
+		ticket.setPin_code(t.getPin_code());
+		ticket.setProduct_category(t.getProduct_category());
+		ticket.setRemarks(t.getRemarks());
+		ticket.setSerial_number(t.getSerial_number());
+		ticket.setState(t.getState());
+		ticket.setStreet(t.getStreet());
+		ticket.setTech_name(t.getTech_name());
+		ticket.setTicket_status(t.getTicket_status());
+		ticket.setTime_of_visit(t.getTime_of_visit());
+		ticket.setVisit_date(t.getVisit_date());
+		ticket.setOtherDamages(ticket.getOtherDamages());
 		return repository.save(ticket);
 	}
-
-
-
 
 }

@@ -1,9 +1,11 @@
 package com.ayushya.spring.controller;
 
-import org.json.JSONObject;
-import org.springframework.web.bind.annotation.PostMapping;
+import javax.validation.Valid;
+
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayushya.spring.service.SMSService;
@@ -12,8 +14,8 @@ import com.ayushya.spring.service.SMSService;
 @RequestMapping("/sms")
 public class SMSController {
 
-	@PostMapping(value = "/")
-	public String createAndSendSMS(@RequestBody JSONObject SMSDetails) {
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public String createAndSendSMS(@Valid @RequestBody JSONObject SMSDetails) {
 		if(new SMSService().sendSMS(SMSDetails)) {
 			return "SUCCESS";
 		}

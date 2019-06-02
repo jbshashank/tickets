@@ -30,6 +30,7 @@ public class tickets {
 	public String invoice_number;
 	public String dealer_name;
 	public String ticket_status;
+	public String otherDamages;
 	
 	public tickets() {
 		
@@ -39,7 +40,7 @@ public class tickets {
 			String city, String state, String pin_code, String tech_name, String mobile_number_1,
 			String mobile_number_2, String email_id, String brand, String product_category, String model_name,
 			String serial_number, String iw, String visit_date, String time_of_visit, String remarks,
-			String date_of_post, String invoice_number, String dealer_name, String ticket_status) {
+			String date_of_post, String invoice_number, String dealer_name, String ticket_status, String otherDamages) {
 		super();
 		this._id = _id;
 		this.call_type = call_type;
@@ -66,6 +67,7 @@ public class tickets {
 		this.invoice_number = invoice_number;
 		this.dealer_name = dealer_name;
 		this.ticket_status = ticket_status;
+		this.otherDamages = otherDamages;
 	}
 
 	public String get_id() {
@@ -268,5 +270,12 @@ public class tickets {
 		this.ticket_status = ticket_status;
 	}
 
+	public String getOtherDamages() {
+		return otherDamages;
+	}
+
+	public void setOtherDamages(String otherDamages) {
+		this.otherDamages = otherDamages;
+	}
 	
 }
