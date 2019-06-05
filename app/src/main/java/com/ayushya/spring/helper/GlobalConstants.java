@@ -1,5 +1,7 @@
 package com.ayushya.spring.helper;
 
+import org.json.JSONObject;
+
 public class GlobalConstants 
 {
 	public static final String SUCCESS = "Success";
@@ -23,4 +25,5 @@ public class GlobalConstants
 	 	1. Change you server folder path where image will be uploaded
 	 */
 	public static final String UPLOADED_FOLDER_PATH = "C:\\apache-tomcat-9.0.17\\webapps\\data\\employeeportal\\";
+	
 }

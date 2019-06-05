@@ -10,6 +10,7 @@ public class closedTicketService {
 	public List<tickets> getClosedTickets(List<tickets> allTickets) {
 		List<tickets> closedTickets = new ArrayList<tickets>();
 		for(int i = 0;i < allTickets.size();i++) {
+			System.out.println(allTickets.get(i).get_id());
 			if(allTickets.get(i).getTicket_status().equals("Closed")) {
 				tickets tick = allTickets.get(i);
 				System.out.println(tick.get_id());
